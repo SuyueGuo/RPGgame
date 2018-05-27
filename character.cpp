@@ -24,7 +24,15 @@ void Character::loadNow()
 void Character::show(QPainter *pa)
 {
     pa->drawImage(_posX*GRID_SIZE, _posY*GRID_SIZE, now);
-    //pa->drawImage(0, 0, death);
+    pa->setBrush(Qt::NoBrush);
+    pa->drawRect(this->_posX * GRID_SIZE, (this->_posY - 0.6) * GRID_SIZE, GRID_SIZE, GRID_SIZE / 8);
+    pa->drawRect(this->_posX * GRID_SIZE, (this->_posY - 0.4) * GRID_SIZE, GRID_SIZE, GRID_SIZE / 8);
+
+    pa->setBrush(Qt::red);
+    pa->drawRect(this->_posX * GRID_SIZE, (this->_posY - 0.6) * GRID_SIZE, _HPnow * GRID_SIZE / _HP, GRID_SIZE / 8);
+    pa->setBrush(Qt::blue);
+    pa->drawRect(this->_posX * GRID_SIZE, (this->_posY - 0.4) * GRID_SIZE, _MPnow * GRID_SIZE / _MP, GRID_SIZE / 8);
+
 }
 
 void Character::move(int direction, int steps)
@@ -72,9 +80,16 @@ void Character::injured(int n_attack)
     this->_HPnow -= inj;
 }
 
-void Character::healing(int HP)
+void Character::healed(int HP)
 {
     this->_HPnow += HP;
     if(_HP<_HPnow)
         _HPnow = _HP;
+}
+
+void Character::addEXP(int e)
+{
+    this->_EXPnow += e;
+    if(this->_EXPnow >= this->_EXP)
+        this->LVup();
 }

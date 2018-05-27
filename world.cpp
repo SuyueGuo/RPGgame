@@ -2,12 +2,15 @@
 #include "icon.h"
 #include<iostream>
 #include<QPainter>
+#define XMAX 27
+#define YMAX 26
 using namespace std;
 //short Map[100][100];
-//1石头2水果3敌人4固定伤害物
+//1石头2水果3人物4固定伤害物
 void World::initWorld(string mapFile){
     //TODO 下面这部分逻辑应该是读入地图文件，生成地图上的对象
     //player 5 5
+    memset(Map, 0, 10000);
     const char* path = mapFile.c_str();
     _background.load(path);
     _death.load("E:\\My project\\RPG\\code\\death.jpg");
@@ -44,7 +47,7 @@ void World::initWorld(string mapFile){
 }
 
 
-void World::show(QPainter * painter){
+void World::show(QPainter* painter){
     painter->drawImage(0, 0, _background);
     vector<RPGObj>::iterator it;
     for(it=this->_objs.begin();it!=this->_objs.end();it++){
@@ -84,7 +87,7 @@ void World::handlePlayerMove(int direction, int steps){
             }
         }
         Map[_player->getX()][_player->getY()] = 0;
-        _player->healing(2);
+        _player->healed(2);
     }
     else if(Map[_player->getX()][_player->getY()] == 3){//敌人
         _player->setX(x);
@@ -98,6 +101,10 @@ void World::handlePlayerMove(int direction, int steps){
             gameover();
         }
     }
+    if(_player->getX() < 0 || _player->getX() > XMAX)
+        _player->setX(x);
+    if(_player->getY() < 0 || _player->getY() > YMAX)
+        _player->setY(y);
     Map[_player->getX()][_player->getY()] = 3;
 }
 

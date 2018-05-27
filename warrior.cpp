@@ -1,15 +1,14 @@
-#include "monster.h"
-
-Monster::Monster()
+#include"warrior.h"
+void Warrior::initialize(QString temp, int x, int y, char camp)
 {
-    QString path = "E:\\My project\\RPG\\code\\images\\boss1a.png";
+    QString path = temp;
     loadAll(path);
     this->setDirec(0);
     this->setSteps(1);
     loadNow();
     this->setState(1);
-    this->setX(20);
-    this->setY(10);
+    this->setX(x);
+    this->setY(y);
     this->setLV(1);
     this->setHP(10);
     this->setMP(5);
@@ -18,6 +17,11 @@ Monster::Monster()
     this->setMAtt(3);
     this->setDef(1);
     this->setMDef(1);
-    this->setCamp('B');
-    this->accumulation = 0;
+    this->setCamp(camp);
+}
+
+void Warrior::phy_attack(Character *people)
+{
+    people->injured(0);
+
 }

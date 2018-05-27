@@ -14,9 +14,10 @@ public:
     ~Character();
     int getX(){return _posX;}
     int getY(){return _posY;}
-    int getDirec(){return _direc;}
+    short getDirec(){return _direc;}
     int getSteps(){return _steps;}
     void show(QPainter *pa);
+    void setState(int s){_state = s;}
     void setX(int x){_posX = x;}
     void setY(int y){_posY = y;}
     void setDirec(int d){_direc = d;}
@@ -28,19 +29,24 @@ public:
     void setLV(int l){_LV = l;}
     void setAtt(int a){_attack = a;}
     void setDef(int d){_defend = d;}
+    void setMAtt(int ma){_m_attack = ma;}
+    void setMDef(int md){_m_defend = md;}
+    void setCamp(char c){_camp = c;}
     void move(int direction, int steps);
     void loadAll(QString path);
     void loadNow();
     void LVup();
     void injured(int n_attack);
-    void healing(int HP);
+    void healed(int HP);
+    void addEXP(int e);
 
  private:
     QImage all;
     QImage now;
-    int _direc;
-    //0123下上左右
+    short _direc;
+    //0123下左右上
     int _steps;
+    short _state;    //0死亡1正常
     int _posX;
     int _posY;
     int _LV;      //等级
@@ -51,7 +57,10 @@ public:
     int _EXP;     //经验值
     int _EXPnow;   //当前经验
     int _attack;        //攻击力
+    int _m_attack;  //魔法攻击
     int _defend;        //防御力
+    int _m_defend; //魔法防御
+    char _camp;     //阵营
 };
 
 #endif // KNIGHT1_H

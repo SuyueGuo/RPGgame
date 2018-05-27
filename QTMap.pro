@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     world.cpp \
     monster.cpp \
     character.cpp \
-    player.cpp
+    player.cpp \
+    magician.cpp \
+    warrior.cpp
 
 HEADERS  += \
     mw1.h \
@@ -39,7 +41,9 @@ HEADERS  += \
     world.h \
     monster.h \
     character.h \
-    player.h
+    player.h \
+    magician.h \
+    warrior.h
 
 FORMS    += \
     mw1.ui
@@ -50,4 +54,5 @@ DISTFILES += \
     images/knight1a.png \
     images/boss1a.png \
     images/death.jpg \
-    death.jpg
+    death.jpg \
+    images/boss1a.png

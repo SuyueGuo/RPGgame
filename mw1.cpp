@@ -25,6 +25,7 @@ MW1::MW1(QWidget *parent) :
     timerFruit = new QTimer(this);
     connect(timerFruit,SIGNAL(timeout()),this,SLOT(recoverFruit()));
     timerFruit->start(5000);
+    this->resize(QSize(894, 864));
 }
 
 MW1::~MW1()
@@ -35,8 +36,9 @@ MW1::~MW1()
 void MW1::paintEvent(QPaintEvent *e){
     QPainter *pa;
     pa = new QPainter();
-    pa->begin(this);
 
+    pa->begin(this);
+    pa->setPen(QPen(Qt::black,1));
     this->_game.show(pa);
 
     pa->end();
